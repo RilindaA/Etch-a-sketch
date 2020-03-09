@@ -1,0 +1,50 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="index.css"/>
+		<link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
+	</head>
+	<body>
+	<h2>Etch a sketch</h2>
+	<div class="buttons">
+		<button class="reset">Reset</button>
+	</div>
+	
+	
+	<div id="content">
+		<div id="container"></div>
+	</div>
+	
+		<script>
+		const container = document.querySelector('#container');
+		const reset = document.querySelector('.reset');
+		const divs = document.querySelectorAll('divs');
+		let number = 16;
+		function createFirstGrids(number){
+			container.style.gridTemplateColumns = `repeat(${number}, auto)`;
+			container.style.gridTemplateRows = `repeat(${number}, auto)`;
+			for(i = 1; i <= number * number; i++){
+				const divs = document.createElement('div');
+				divs.classList.add('divs');
+				divs.style.display = "flex";
+				divs.style.justifyContent = "center";
+				divs.style.alignItems = "center";
+				divs.style.border = "1px solid black";
+				container.appendChild(divs);
+			}	
+		}
+		
+		reset.addEventListener('click', ()=>{
+			container.style.backgroundColor = "";
+			const grids = prompt("Enter the number of the grids:");
+			createFirstGrids(grids);
+		});	
+		divs.forEach((cell) =>{
+			 cell.addEventListener('mouseover', (e) => {
+			 var randomColor = Math.floor(Math.random()*16777215).toString(16);
+             cell.style.backgroundColor = '#' + randomColor;
+			});
+		})
+		createFirstGrids(number);			
+		</script>
+	</body>
+</html>
