@@ -17,11 +17,10 @@
 		<script>
 		const container = document.querySelector('#container');
 		const reset = document.querySelector('.reset');
-		const divs = document.querySelectorAll('divs');
 		let number = 16;
-		function createFirstGrids(number){
+		// Create first grids 16x16
+		function createGrids(number){
 			container.style.gridTemplateColumns = `repeat(${number}, auto)`;
-			container.style.gridTemplateRows = `repeat(${number}, auto)`;
 			for(i = 1; i <= number * number; i++){
 				const divs = document.createElement('div');
 				divs.classList.add('divs');
@@ -32,19 +31,18 @@
 				container.appendChild(divs);
 			}	
 		}
-		
+		//Add RGB to the grids on mouse over
+		container.addEventListener('mouseover',(e)=>{
+			var randomColor = Math.floor(Math.random()*16777215).toString(16);
+             e.target.style.backgroundColor = '#' + randomColor;
+		});
+		//Reset the div and create new grids
 		reset.addEventListener('click', ()=>{
-			container.style.backgroundColor = "";
+			container.innerHTML = "";
 			const grids = prompt("Enter the number of the grids:");
-			createFirstGrids(grids);
-		});	
-		divs.forEach((cell) =>{
-			 cell.addEventListener('mouseover', (e) => {
-			 var randomColor = Math.floor(Math.random()*16777215).toString(16);
-             cell.style.backgroundColor = '#' + randomColor;
-			});
-		})
-		createFirstGrids(number);			
+			createGrids(grids);
+		});
+		createGrids(number);			
 		</script>
 	</body>
 </html>
